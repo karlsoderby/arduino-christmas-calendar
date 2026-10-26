@@ -150,17 +150,4 @@ document.addEventListener('keydown', (e) => {
 });
 window.addEventListener('popstate', render);
 
-// ---------- Background snow ----------
-const snow = document.querySelector('#snow');
-for (let i = 0; i < 40; i++) {
-  const flake = document.createElement('span');
-  flake.className = 'flake';
-  flake.textContent = '❄';
-  flake.style.left = Math.random() * 100 + 'vw';
-  flake.style.fontSize = 0.5 + Math.random() * 1.1 + 'em';
-  flake.style.animationDuration = 7 + Math.random() * 10 + 's';
-  flake.style.animationDelay = -Math.random() * 17 + 's';
-  snow.appendChild(flake);
-}
-
 render();

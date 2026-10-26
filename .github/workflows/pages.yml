@@ -27,8 +27,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Build site content
-        run: python3 site/build.py
+      - name: Build encrypted site content
+        env:
+          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+        run: |
+          test -n "$SITE_PASSWORD" || { echo "SITE_PASSWORD secret is missing"; exit 1; }
+          pip install cryptography
+          python3 site/build.py
 
       - name: Assemble published files
         run: |

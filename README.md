@@ -76,6 +76,8 @@ The `site/` folder is a web page built around the calendar picture. Click the bo
 
 3. **Live site:** [karlsoderby.github.io/arduino-christmas-calendar](https://karlsoderby.github.io/arduino-christmas-calendar/). It's hosted on GitHub Pages, and every push to `main` rebuilds and redeploys it automatically (see `.github/workflows/pages.yml`).
 
+4. **Password:** The live site is password protected. The day content is encrypted at build time with the `SITE_PASSWORD` repository secret (**Settings > Secrets and variables > Actions**). To change the password, update the secret and re-run the workflow. A local build without `SITE_PASSWORD` is not encrypted, and `site/content.js` is not committed.
+
 ## App Structure
 
 ```

@@ -9,7 +9,18 @@
   <body>
     <div id="snow" aria-hidden="true"></div>
 
-    <main id="calendar-view">
+    <section id="lock" hidden>
+      <form id="lock-form">
+        <div class="lock-icon" aria-hidden="true">🎁</div>
+        <h1>Arduino Christmas Calendar</h1>
+        <p>Enter the password to unwrap the calendar.</p>
+        <input id="lock-password" type="password" autocomplete="current-password" aria-label="Password" required />
+        <button type="submit">Unwrap 🎄</button>
+        <p id="lock-error" class="lock-error" hidden>Wrong password, try again!</p>
+      </form>
+    </section>
+
+    <main id="calendar-view" hidden>
       <div id="calendar">
         <img src="calendar.jpg" alt="Arduino Christmas Calendar with 25 doors" draggable="false" />
         <div id="doors"></div>
@@ -41,6 +52,6 @@
 
     <script src="vendor/marked.min.js"></script>
     <script src="content.js"></script>
-    <script src="app.js"></script>
+    <script src="unlock.js"></script>
   </body>
 </html>
