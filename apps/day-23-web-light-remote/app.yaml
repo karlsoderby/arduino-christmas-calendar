@@ -1,0 +1,5 @@
+name: "Day 23 - Christmas Light Remote"
+icon: 🎮
+description: A festive web page that controls the Modulino Pixels Christmas lights from your phone or computer.
+bricks:
+  - arduino:web_ui

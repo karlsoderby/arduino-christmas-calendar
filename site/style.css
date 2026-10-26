@@ -1,0 +1,491 @@
+:root {
+  --teal: #0f5a63;
+  --teal-dark: #0a3d44;
+  --orange: #f2652a;
+  --cream: #fdf1e1;
+  --gold: #ffd166;
+  --red: #d62828;
+  --green: #2a9d8f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--cream);
+  background: radial-gradient(circle at top, #136a74 0%, var(--teal-dark) 70%);
+  overflow-x: hidden;
+}
+
+/* ---------- Calendar ---------- */
+
+#calendar-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+#calendar {
+  position: relative;
+  width: min(100%, calc((100vh - 70px) * 0.6706));
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  user-select: none;
+}
+
+#calendar img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hint {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Clickable door over the image */
+.door {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+  transform-origin: left center;
+  transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+}
+
+.door:focus-visible {
+  outline: 3px dashed var(--gold);
+  outline-offset: 2px;
+}
+
+/* Hover: the door lights up like a string of fairy lights */
+.door:hover,
+.door:focus-visible {
+  z-index: 2;
+  transform: scale(1.06);
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.45) 0%, rgba(242, 101, 42, 0.15) 60%, transparent 75%);
+  animation: glow 1.2s ease-in-out infinite;
+}
+
+.door::before,
+.door::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+/* Twinkling bulb border */
+.door::before {
+  border: 4px dotted var(--gold);
+  filter: drop-shadow(0 0 4px var(--gold));
+}
+
+/* Sparkles */
+.door::after {
+  background:
+    radial-gradient(circle, #fff 0 2px, transparent 3px) 10% 15% / 20% 20% no-repeat,
+    radial-gradient(circle, #fff 0 2px, transparent 3px) 85% 25% / 20% 20% no-repeat,
+    radial-gradient(circle, #fff 0 2px, transparent 3px) 20% 85% / 20% 20% no-repeat,
+    radial-gradient(circle, #fff 0 2px, transparent 3px) 80% 80% / 20% 20% no-repeat;
+}
+
+.door:hover::before,
+.door:focus-visible::before {
+  opacity: 1;
+  animation: bulbs 0.6s steps(2) infinite;
+}
+
+.door:hover::after,
+.door:focus-visible::after {
+  opacity: 1;
+  animation: twinkle 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 12px 2px rgba(255, 209, 102, 0.6), inset 0 0 12px rgba(255, 209, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 28px 8px rgba(242, 101, 42, 0.8), inset 0 0 18px rgba(255, 209, 102, 0.6);
+  }
+}
+
+@keyframes bulbs {
+  0% {
+    border-color: var(--gold);
+  }
+  100% {
+    border-color: var(--red);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1.1) rotate(8deg);
+    opacity: 1;
+  }
+}
+
+/* Click: the door swings open */
+.door.opening {
+  z-index: 3;
+  animation: swing 0.7s ease-in forwards;
+  background: rgba(255, 209, 102, 0.6);
+}
+
+@keyframes swing {
+  0% {
+    transform: perspective(600px) rotateY(0deg) scale(1.06);
+  }
+  100% {
+    transform: perspective(600px) rotateY(-100deg) scale(1.06);
+  }
+}
+
+/* ---------- Click animation: decorations + curtain ---------- */
+
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  font-size: 28px;
+  line-height: 1;
+  animation: burst 1.1s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+@keyframes burst {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+#curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, rgba(255, 209, 102, 0.9) 0 3px, transparent 4px) 0 0 / 60px 60px,
+    radial-gradient(circle, rgba(255, 255, 255, 0.7) 0 2px, transparent 3px) 30px 30px / 60px 60px,
+    linear-gradient(135deg, var(--red), #8d1b1b);
+  clip-path: circle(0 at var(--x, 50%) var(--y, 50%));
+}
+
+#curtain.closing {
+  animation: curtain-in 0.6s ease-in forwards;
+}
+
+/* Ribbon and bow, so the curtain looks like wrapping paper */
+#curtain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent calc(50% - 18px), var(--gold) calc(50% - 18px) calc(50% + 18px), transparent calc(50% + 18px)),
+    linear-gradient(0deg, transparent calc(50% - 18px), var(--gold) calc(50% - 18px) calc(50% + 18px), transparent calc(50% + 18px));
+}
+
+#curtain::after {
+  content: "🎀";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 120px;
+  transform: translate(-50%, -55%);
+}
+
+#curtain.opening {
+  animation: curtain-out 0.6s ease-out forwards;
+}
+
+@keyframes curtain-in {
+  from {
+    clip-path: circle(0 at var(--x) var(--y));
+  }
+  to {
+    clip-path: circle(150% at var(--x) var(--y));
+  }
+}
+
+@keyframes curtain-out {
+  from {
+    clip-path: circle(150% at 50% 50%);
+  }
+  to {
+    clip-path: circle(0 at 50% 50%);
+  }
+}
+
+/* ---------- Reader (instructions) ---------- */
+
+#reader {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  padding: 0 16px 48px;
+}
+
+.garland {
+  height: 34px;
+  margin: 0 -16px;
+  background:
+    radial-gradient(circle at 50% 70%, var(--red) 0 7px, transparent 8px) 0 0 / 60px 34px,
+    radial-gradient(circle at 50% 70%, var(--gold) 0 7px, transparent 8px) 20px 0 / 60px 34px,
+    radial-gradient(circle at 50% 70%, var(--green) 0 7px, transparent 8px) 40px 0 / 60px 34px,
+    radial-gradient(ellipse at 50% 0, transparent 14px, #1f6b3a 15px 18px, transparent 19px) 0 -10px / 30px 30px;
+  animation: garland-blink 1.6s steps(2) infinite;
+}
+
+@keyframes garland-blink {
+  50% {
+    filter: brightness(1.4) saturate(1.3);
+  }
+}
+
+.reader-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 12px 0;
+  background: linear-gradient(var(--teal-dark) 70%, transparent);
+}
+
+.reader-nav-days {
+  display: flex;
+  gap: 8px;
+}
+
+.reader-nav button,
+.download {
+  padding: 10px 16px;
+  border: 2px solid var(--orange);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--cream);
+  background: rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.reader-nav button:hover,
+.download:hover {
+  background: var(--orange);
+}
+
+.reader-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  background: transparent;
+}
+
+article {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 28px 32px 36px;
+  border: 3px solid var(--orange);
+  border-radius: 20px;
+  background: rgba(10, 61, 68, 0.85);
+  box-shadow: 0 0 40px rgba(242, 101, 42, 0.25);
+  animation: pop-in 0.5s ease-out;
+}
+
+@keyframes pop-in {
+  from {
+    transform: translateY(30px) scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.reader-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 2px dashed rgba(253, 241, 225, 0.3);
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--cream);
+  background: var(--orange);
+  box-shadow: inset 0 0 0 3px var(--cream), 0 0 16px rgba(242, 101, 42, 0.6);
+}
+
+.reader-header h1 {
+  flex: 1;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.download[hidden] {
+  display: none;
+}
+
+/* Rendered README */
+.markdown h2 {
+  margin-top: 28px;
+  color: var(--gold);
+}
+
+.markdown h2::before {
+  content: "✦ ";
+  color: var(--orange);
+}
+
+.markdown a {
+  color: var(--gold);
+}
+
+.markdown code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.markdown pre {
+  padding: 12px;
+  border-radius: 10px;
+  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.markdown pre code {
+  padding: 0;
+  background: none;
+}
+
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.markdown th,
+.markdown td {
+  padding: 8px 10px;
+  border: 1px solid rgba(253, 241, 225, 0.25);
+  text-align: left;
+}
+
+.markdown th {
+  background: rgba(242, 101, 42, 0.3);
+}
+
+.markdown blockquote {
+  margin: 12px 0;
+  padding: 8px 16px;
+  border-left: 4px solid var(--red);
+  background: rgba(214, 40, 40, 0.15);
+}
+
+.markdown li {
+  margin: 4px 0;
+}
+
+/* ---------- Background snow ---------- */
+
+#snow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#calendar-view,
+#reader {
+  position: relative;
+  z-index: 1;
+}
+
+.flake {
+  position: absolute;
+  top: -2em;
+  color: #fff;
+  opacity: 0.7;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+  article {
+    padding: 20px 16px;
+  }
+
+  .reader-header h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

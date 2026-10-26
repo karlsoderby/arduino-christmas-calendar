@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arduino Christmas Calendar</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="snow" aria-hidden="true"></div>
+
+    <main id="calendar-view">
+      <div id="calendar">
+        <img src="calendar.jpg" alt="Arduino Christmas Calendar with 25 doors" draggable="false" />
+        <div id="doors"></div>
+      </div>
+      <p class="hint">Click "Start Here!" to begin, then open a door each day!</p>
+    </main>
+
+    <div id="curtain" aria-hidden="true"></div>
+    <div id="particles" aria-hidden="true"></div>
+
+    <section id="reader" hidden>
+      <div class="garland" aria-hidden="true"></div>
+      <nav class="reader-nav">
+        <button id="back" type="button">← Calendar</button>
+        <div class="reader-nav-days">
+          <button id="prev" type="button">‹ Previous</button>
+          <button id="next" type="button">Next ›</button>
+        </div>
+      </nav>
+      <article>
+        <header class="reader-header">
+          <div id="badge" class="badge"></div>
+          <h1 id="title"></h1>
+          <a id="download" class="download" download>⬇ Download App (.zip)</a>
+        </header>
+        <div id="content" class="markdown"></div>
+      </article>
+    </section>
+
+    <script src="vendor/marked.min.js"></script>
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

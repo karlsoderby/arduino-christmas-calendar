@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Christmas Light Remote</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🎄 Christmas Light Remote 🎄</h1>
+      <p class="subtitle">Pick a light show for your Modulino Pixels</p>
+      <span id="status" class="status">Connecting…</span>
+    </header>
+
+    <main>
+      <section class="card">
+        <div class="buttons">
+          <button data-mode="1">🎄 Classic</button>
+          <button data-mode="2">🍭 Candy Cane</button>
+          <button data-mode="3">❄️ Snow Twinkle</button>
+          <button data-mode="4">✨ Golden Glow</button>
+          <button data-mode="0">🌙 Lights Off</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>Arduino UNO Q · Christmas Calendar · Day 23</footer>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="snow.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+/* Shared festive theme for the Christmas Calendar web Apps */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #fdf6e3;
+  background: radial-gradient(circle at top, #1d3557 0%, #0b1426 70%);
+  text-align: center;
+  overflow-x: hidden;
+}
+
+header {
+  padding: 24px 16px 8px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 0 0 12px #e63946;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: #a8dadc;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  background: #6c757d;
+}
+
+.status.online {
+  background: #2a9d8f;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 16px auto;
+  padding: 0 16px;
+}
+
+.card {
+  margin-bottom: 16px;
+  padding: 20px;
+  border: 2px solid #e63946;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 20px rgba(230, 57, 70, 0.25);
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+button {
+  min-width: 140px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background: #2a9d8f;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+
+button:hover {
+  background: #e63946;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button.active {
+  background: #e63946;
+  box-shadow: 0 0 12px #ffd166;
+}
+
+.big {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #ffd166;
+}
+
+footer {
+  padding: 16px;
+  font-size: 0.8rem;
+  color: #a8dadc;
+}
+
+/* Falling snow */
+.snowflake {
+  position: fixed;
+  top: -2em;
+  z-index: 0;
+  color: #fff;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}

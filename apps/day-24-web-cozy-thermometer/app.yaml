@@ -1,0 +1,5 @@
+name: "Day 24 - Cozy Christmas Thermometer"
+icon: 🧣
+description: A festive web dashboard that shows the temperature and humidity from the Modulino Thermo.
+bricks:
+  - arduino:web_ui

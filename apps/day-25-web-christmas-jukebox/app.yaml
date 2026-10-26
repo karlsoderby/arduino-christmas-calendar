@@ -1,0 +1,5 @@
+name: "Day 25 - Christmas Jukebox"
+icon: 🎶
+description: "Grand finale: a festive web jukebox that plays Christmas songs on the Modulino Buzzer with a Modulino Pixels light show."
+bricks:
+  - arduino:web_ui

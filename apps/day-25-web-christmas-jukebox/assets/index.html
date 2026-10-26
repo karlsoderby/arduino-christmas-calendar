@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Christmas Jukebox</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🎶 Christmas Jukebox 🎶</h1>
+      <p class="subtitle" id="countdown"></p>
+      <span id="status" class="status">Connecting…</span>
+    </header>
+
+    <main>
+      <section class="card">
+        <div class="buttons">
+          <button data-song="1">🔔 Jingle Bells</button>
+          <button data-song="2">🎁 We Wish You a Merry Christmas</button>
+          <button data-song="3">🌟 Silent Night</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="big">🎅</div>
+        <div id="now-playing">Pick a song!</div>
+      </section>
+    </main>
+
+    <footer>Arduino UNO Q · Christmas Calendar · Day 25 · Merry Christmas!</footer>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="snow.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

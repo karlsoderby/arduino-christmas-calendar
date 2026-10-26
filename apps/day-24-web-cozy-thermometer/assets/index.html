@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cozy Christmas Thermometer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🧣 Cozy Christmas Thermometer 🧣</h1>
+      <p class="subtitle">Live from the Modulino Thermo</p>
+      <span id="status" class="status">Connecting…</span>
+    </header>
+
+    <main>
+      <section class="card">
+        <div>🌡️ Temperature</div>
+        <div class="big"><span id="temperature">--</span> °C</div>
+      </section>
+
+      <section class="card">
+        <div>💧 Humidity</div>
+        <div class="big"><span id="humidity">--</span> %</div>
+      </section>
+
+      <section class="card">
+        <div class="big" id="mood-icon">🎄</div>
+        <div id="mood-text">Waiting for data…</div>
+      </section>
+    </main>
+
+    <footer>Arduino UNO Q · Christmas Calendar · Day 24</footer>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="snow.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
