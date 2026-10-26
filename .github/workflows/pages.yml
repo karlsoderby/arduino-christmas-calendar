@@ -40,6 +40,8 @@ jobs:
           mkdir -p _site
           cp -r site zips _site/
           cp index.html _site/
+          # Cache-bust assets so visitors never mix old and new files
+          sed -i "s/?v=dev/?v=${GITHUB_SHA::8}/g" _site/site/index.html _site/site/unlock.js
 
       - uses: actions/configure-pages@v5
 

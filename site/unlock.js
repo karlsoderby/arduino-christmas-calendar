@@ -38,7 +38,7 @@ async function decrypt(password) {
 function startApp() {
   lockScreen.hidden = true;
   const script = document.createElement('script');
-  script.src = 'app.js';
+  script.src = 'app.js?v=dev';
   document.body.appendChild(script);
 }
 
@@ -70,9 +70,17 @@ lockForm.addEventListener('submit', async (event) => {
     startApp();  // unencrypted local build
     return;
   }
-  const saved = sessionStorage.getItem(STORAGE_KEY);
-  if (saved && (await tryUnlock(saved, false))) return;
-  sessionStorage.removeItem(STORAGE_KEY);
+  try {
+    const saved = sessionStorage.getItem(STORAGE_KEY);
+    if (saved && (await tryUnlock(saved, false))) return;
+    sessionStorage.removeItem(STORAGE_KEY);
+  } catch (error) {
+    console.error(error);
+  }
   lockScreen.hidden = false;
+  if (!window.CALENDAR_ENCRYPTED || !window.crypto?.subtle) {
+    lockError.textContent = 'The calendar could not load. Try reloading the page (it needs https).';
+    lockError.hidden = false;
+  }
   lockInput.focus();
 })();
