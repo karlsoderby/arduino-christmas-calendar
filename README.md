@@ -74,6 +74,8 @@ The `site/` folder is a web page built around the calendar picture. Click the bo
 
    Then browse to `http://localhost:8000/site/`.
 
+3. **Live site:** [karlsoderby.github.io/arduino-christmas-calendar](https://karlsoderby.github.io/arduino-christmas-calendar/). It's hosted on GitHub Pages, and every push to `main` rebuilds and redeploys it automatically (see `.github/workflows/pages.yml`).
+
 ## App Structure
 
 ```
